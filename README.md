@@ -20,11 +20,13 @@ https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-w
   -> The sample data is located in /mnt/dietpi_userdata/owncloud_data/admin/files
 -Setting up ssh key for raspberry pi from laptop: ssh -i owncloud_pi root@10.0.0.197
   -> Use ssh key-gen to generate a key with custom name and adding the .pub file to ~/.ssh/authorized_keys
--Mounting the external drive with correct ownership: sudo mount -o rw,user,uid=111,dmask=007,fmask=117 /dev/sda1 /media/usb
+-Mounting the external drive with correct ownership: sudo mount -o umask=0,uid=111,gid=33 /dev/sdc1 /media/usb
   -> lsblk to see where the drive is
   -> cat /etc/group to see: redis:x:111:www-data
-  -> cat /etc/passwd to see: www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin (? although I didn't need this)
+  -> cat /etc/passwd to see: www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin 
+  -> ls -l to compare permissions 
   -> Will have to remount if disconnected and if restarted
+  -> I have confirmed that I can remove the drive and see the files on it and then get it back there 
 -Creating path in the owncloud web GUI: admin > storage (in admin section) > External Storage:local > configuration:/media/usb/
 
 (3) Setting up VM for port translation public access
@@ -45,84 +47,12 @@ https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-w
 -Using netstat -nlpt to confirm that we have the right accessability with the ports (I am unsure to what command I used for this):
 tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      792/lighttpd        
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      636/sshd: /usr/sbin 
+'when some computer tries to connect to your vm, what restrictions do we have on its IP address, 0.0.0.0 is the wildcard'
 -Confirming that 34.127.85.102:6080/owncloud gives access to owncloud
 -configure the "trusted_domains" setting in config/config.php: sudo nano /var/www/owncloud/config/config.php
   -> 4 => '34.127.85.102', 
-
-
-
-
-
-
-
-
-lsblk
-cat group
-cd /etc/group
-cat /etc/passwd
-cat /etc/group
-sudo mount -o rw,user,uid=111,dmask=007,fmask=117 /dev/sda1 /media/usb
-
-sudo nano /var/www/owncloud/config/config.php
-mount sda1 /media/usb -o uid=33
-mount /dev/sda1 /media/usb -o uid=33
-
-
-crontab -e
-chmod 777 tunnel.sh
-
-
-
-
--etc/hosts to create alias 
-
-
--Setting up SSH
--Setting up Reverse Tunnelling script
--Setting up port forwarding with the right rules in the VM
--Any rules for this (0.0.0.0 thing)
-'when some computer tries to connect to your vm, what restrictions do we have on its IP address, 0.0.0.0 is the wildcard'
--Chacning the config.php file 
-
-
-
-Notes:
-https://10.0.0.197/owncloud
-http://X.x.x.x:6080/owncloud
-admin dietpi
-netstat -nlpt (sudo apt install nettools?) which programs have their ear waiting for connections
-
-
-How to ssh from macbook to vm
-How to ssh from raspberry pi to vm 
-How to complete the tunnel from vm to go to raspberry pi
-
-Where is the different types of data located on the pi
-Where is the config file located
-
-
-public key is like the lock put on the device, the private key is the key 
-
-
-
-(Note) SSH Trouble:
-I had some trouble when I downsized my vm to a XXX version. The IP address changed and potentially other things changed too. I ended up clearing known_hosts and authorized_keys files as well as all existing keys. I could generate new keys with new names ssh-keygen and utilize ssh -i cloud_vm garges@x.x.x.x. I also learned the difference between autorized_files and 
-
-
-
-
-
-To set up the raspberry pi, I installed dietpi and used the GUI to install owncloud. The config file provided the logins to the server (admin, dietpi). 
-Hooking up an external drive I had to mount it with the write owner.... [will fill this in]
-
-Setting up a cloud VM with IP address and ssh access: ssh garges@34.125.40.187
-Had to do some port forwarding set up on the vm...
-
-Set up reverse tunnelling with a script. Also set up a tunnel for the cloud vm but had to change a couple of settings... 0.0.0.0
-using netcat? -nlpt 
-Had to add the cloud VM IP to the config file 
-
-
-
-http://34.x.x.x:6080/owncloud
-https://10.0.0.197/owncloud (when on the network)
+-Creating automated script so that the reverse tunnel and port translation are automatically done
+  -> creating tunnel.sh script from tutorial with correct permissions
+  -> ssh -N -R 0.0.0.0:6000:localhost:22 -R 0.0.0.0:6080:localhost:80 -i ~/.ssh/cloud_vm garges@34.127.85.102
+  -> crontab -e to open the cron tab
+  -> */1 * * * * ~/tunnel.sh > tunnel.log 2>&1
