@@ -49,6 +49,7 @@ tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      636/sshd: /usr/sbin 
 'when some computer tries to connect to your vm, what restrictions do we have on its IP address, 0.0.0.0 is the wildcard'
 -Confirming that 34.127.85.102:6080/owncloud gives access to owncloud
+  -> This needs http://34.127.85.102:6080/owncloud
 -configure the "trusted_domains" setting in config/config.php: sudo nano /var/www/owncloud/config/config.php
   -> 4 => '34.127.85.102', 
 -Creating automated script so that the reverse tunnel and port translation are automatically done
