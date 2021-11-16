@@ -55,5 +55,6 @@ tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      
 -Creating automated script so that the reverse tunnel and port translation are automatically done
   -> creating tunnel.sh script from tutorial with correct permissions
   -> ssh -N -R 0.0.0.0:6000:localhost:22 -R 0.0.0.0:6080:localhost:80 -i ~/.ssh/cloud_vm garges@34.127.85.102
+  -> /etc/ssh/sshd_config "gateway ports" this is the file that was changed on the cloud vm "GatewayPorts clientspecified"
   -> crontab -e to open the cron tab
   -> */1 * * * * ~/tunnel.sh > tunnel.log 2>&1
