@@ -58,3 +58,6 @@ tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      
   -> /etc/ssh/sshd_config "gateway ports" this is the file that was changed on the cloud vm "GatewayPorts clientspecified"
   -> crontab -e to open the cron tab
   -> */1 * * * * ~/tunnel.sh > tunnel.log 2>&1
+-Setting up automatic mounting in /etc/fstab UUID=877F-16FC /media/usb vfat defaults,auto,users,rw,nofail,umask=0,uid=111,gid=33 0 0
+  -> Run the blkid command to find out the UUID of the USB drive:
+  -> https://www.shellhacks.com/raspberry-pi-mount-usb-drive-automatically/
