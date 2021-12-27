@@ -7,7 +7,7 @@ https://thepi.io/how-to-set-up-a-raspberry-pi-owncloud-server/
 https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-with-reverse-ssh-and-google-cloud-platform-59b6a89501a
 
 (1) Gathering Hardware:
--Raspberry Pi 4 Model B
+- Raspberry Pi 4 Model B
 -DietPi Image https://dietpi.com/docs/install/
 -1 TB Harddrive https://www.amazon.com/dp/B07VTWX8MN?psc=1&ref=ppx_yo2_dt_b_product_details
 
