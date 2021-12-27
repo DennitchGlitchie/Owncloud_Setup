@@ -23,8 +23,9 @@ https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-w
   - Use ssh key-gen to generate a key with custom name and adding the .pub file to ~/.ssh/authorized_keys
 - Mounting the external drive with correct ownership: sudo mount -o umask=0,uid=111,gid=33 /dev/sdc1 /media/usb
   - lsblk to see where the drive is
-  - cat /etc/group to see: "redis:x:111:www-data"
-  - cat /etc/passwd to see: "www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin" 
+  - cat /etc/group to see: "redis: x :111:www-data"
+  - cat /etc/passwd to see: "www-data: x :33:33:www-data:/var/www:/usr/sbin/nologin" 
+  - (": x :" should be ":x:")
   - ls -l to compare permissions 
   - Will have to remount if disconnected and if restarted
   - I have confirmed that I can remove the drive and see the files on it and then get it back there 
