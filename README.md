@@ -8,8 +8,8 @@ https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-w
 
 (1) Gathering Hardware:
 - Raspberry Pi 4 Model B
--DietPi Image https://dietpi.com/docs/install/
--1 TB Harddrive https://www.amazon.com/dp/B07VTWX8MN?psc=1&ref=ppx_yo2_dt_b_product_details
+- DietPi Image https://dietpi.com/docs/install/
+- 1 TB Harddrive https://www.amazon.com/dp/B07VTWX8MN?psc=1&ref=ppx_yo2_dt_b_product_details
 
 (2) Setting up Raspberry Pi for Owncloud 
 -Setting up automatic wifi by editting the config file https://dietpi.com/phpbb/viewtopic.php?p=9#p9
