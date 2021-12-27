@@ -13,9 +13,9 @@ https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-w
 
 (2) Setting up Raspberry Pi for Owncloud 
 - Setting up automatic wifi by editting the config file https://dietpi.com/phpbb/viewtopic.php?p=9#p9
-  -> Open dietpi-wifi.txt and open it with wordpad
-  -> Change aWIFI_SSID[0]='MySSID' and aWIFI_KEY[0]='MyWifiKey'
-  -> Don't forget to set automatic wifi to be enabled? AUTO_SETUP_NET_WIFI_ENABLED=1
+  - Open dietpi-wifi.txt and open it with wordpad
+  - Change aWIFI_SSID[0]='MySSID' and aWIFI_KEY[0]='MyWifiKey'
+  - Don't forget to set automatic wifi to be enabled? AUTO_SETUP_NET_WIFI_ENABLED=1
 - Downloading the owncloud software with command dietpi-config
 - Logging in on local network 10.0.0.197/owncloud admin dietpi
   -> The sample data is located in /mnt/dietpi_userdata/owncloud_data/admin/files
