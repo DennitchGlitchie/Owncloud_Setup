@@ -31,34 +31,34 @@ https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-w
 - Creating path in the owncloud web GUI: admin > storage (in admin section) > External Storage:local > configuration:/media/usb/
 
 (3) Setting up VM for port translation public access
--Creating a free tier cloud vm https://cloud.google.com/free/docs/gcp-free-tier#free-tier-usage-limits
--Adding firewall rule for reverse SSH https://www.youtube.com/watch?v=lTYXKAKv-ok (he does UDP 6000-6100 but I did allow all)
--Setting up ssh key for cloud_vm from laptop: ssh -i ~/.ssh/cloud_vm garges@34.127.85.102 (laptop needs the key path)
+- Creating a free tier cloud vm https://cloud.google.com/free/docs/gcp-free-tier#free-tier-usage-limits
+- Adding firewall rule for reverse SSH https://www.youtube.com/watch?v=lTYXKAKv-ok (he does UDP 6000-6100 but I did allow all)
+- Setting up ssh key for cloud_vm from laptop: ssh -i ~/.ssh/cloud_vm garges@34.127.85.102 (laptop needs the key path)
   -> Use ssh key-gen to generate a key with custom name and adding the .pub file to online interface or ~/.ssh/authorized_keys
--Setting up ssh key for cloud_vm from raspberry pi: ssh -i ~/.ssh/cloud_vm garges@34.127.85.102 (Raspberry pi needs the key path)
+- Setting up ssh key for cloud_vm from raspberry pi: ssh -i ~/.ssh/cloud_vm garges@34.127.85.102 (Raspberry pi needs the key path)
   -> Use ssh key-gen to generate a key with custom name and adding the .pub file to ~/.ssh/authorized_keys
--Testing a reverse tunnel set up on the raspberry pi: ssh -N -R 0.0.0.0:6000:localhost:22 -i ~/.ssh/cloud_vm garges@34.127.85.102
+- Testing a reverse tunnel set up on the raspberry pi: ssh -N -R 0.0.0.0:6000:localhost:22 -i ~/.ssh/cloud_vm garges@34.127.85.102
   -> 0.0.0.0 is wildcard for restrictions on IP address trying to connect
   -> -N and -R specify XX and reverse tunneling
   -> Listening on port 6000 and translate on port 22 (ssh port)
--Follow the tunnel from cloud vm: ssh -p 6000 root@localhost  
--Testing out port translation: ssh -N -R 0.0.0.0:6080:localhost:80 -i ~/.ssh/cloud_vm garges@34.127.85.102
+- Follow the tunnel from cloud vm: ssh -p 6000 root@localhost  
+- Testing out port translation: ssh -N -R 0.0.0.0:6080:localhost:80 -i ~/.ssh/cloud_vm garges@34.127.85.102
   -> 80 is the port of the owncloud server, 6080 is the port we will open to 
   -> To install netstat: apt-get install net-tools
--Using netstat -nlpt to confirm that we have the right accessability with the ports (I am unsure to what command I used for this):
+- Using netstat -nlpt to confirm that we have the right accessability with the ports (I am unsure to what command I used for this):
 tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      792/lighttpd        
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      636/sshd: /usr/sbin 
 'when some computer tries to connect to your vm, what restrictions do we have on its IP address, 0.0.0.0 is the wildcard'
--Confirming that 34.127.85.102:6080/owncloud gives access to owncloud
+- Confirming that 34.127.85.102:6080/owncloud gives access to owncloud
   -> This needs http://34.127.85.102:6080/owncloud
--configure the "trusted_domains" setting in config/config.php: sudo nano /var/www/owncloud/config/config.php
+- Configure the "trusted_domains" setting in config/config.php: sudo nano /var/www/owncloud/config/config.php
   -> 4 => '34.127.85.102', 
--Creating automated script so that the reverse tunnel and port translation are automatically done
+- Creating automated script so that the reverse tunnel and port translation are automatically done
   -> creating tunnel.sh script from tutorial with correct permissions
   -> ssh -N -R 0.0.0.0:6000:localhost:22 -R 0.0.0.0:6080:localhost:80 -i ~/.ssh/cloud_vm garges@34.127.85.102
   -> /etc/ssh/sshd_config "gateway ports" this is the file that was changed on the cloud vm "GatewayPorts clientspecified"
   -> crontab -e to open the cron tab
   -> */1 * * * * ~/tunnel.sh > tunnel.log 2>&1
--Setting up automatic mounting in /etc/fstab UUID=877F-16FC /media/usb vfat defaults,auto,users,rw,nofail,umask=0,uid=111,gid=33 0 0
+- Setting up automatic mounting in /etc/fstab UUID=877F-16FC /media/usb vfat defaults,auto,users,rw,nofail,umask=0,uid=111,gid=33 0 0
   -> Run the blkid command to find out the UUID of the USB drive:
   -> https://www.shellhacks.com/raspberry-pi-mount-usb-drive-automatically/
