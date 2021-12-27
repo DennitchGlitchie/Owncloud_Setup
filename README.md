@@ -1,6 +1,6 @@
 # Owncloud_Setup
 
-This project attempts to utilize a Raspberry pi to host Owncloud server and set it up for public accessutilizing a cloud VM and port translation
+## This project attempts to utilize a Raspberry pi to host Owncloud server and set it up for public accessutilizing a cloud VM and port translation
 
 Resources:
 https://thepi.io/how-to-set-up-a-raspberry-pi-owncloud-server/
