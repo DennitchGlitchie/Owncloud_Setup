@@ -54,6 +54,7 @@ https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-w
   - This needs http://34.127.85.102:6080/owncloud
 - Configure the "trusted_domains" setting in config/config.php: sudo nano /var/www/owncloud/config/config.php
   - 4 => '34.127.85.102', 
+  - login is admin, pw is dietpi
 - Creating automated script so that the reverse tunnel and port translation are automatically done
   - creating tunnel.sh script from tutorial with correct permissions
   - ssh -N -R 0.0.0.0:6000:localhost:22 -R 0.0.0.0:6080:localhost:80 -i ~/.ssh/cloud_vm garges@34.127.85.102
