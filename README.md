@@ -64,3 +64,8 @@ https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-w
 - Setting up automatic mounting in /etc/fstab UUID=877F-16FC /media/usb vfat defaults,auto,users,rw,nofail,umask=0,uid=111,gid=33 0 0
   - Run the blkid command to find out the UUID of the USB drive:
   - https://www.shellhacks.com/raspberry-pi-mount-usb-drive-automatically/
+
+(4) Post Setup Setup
+- Navigating to http://34.127.85.102:6080/owncloud (admin; dietpi)
+- Admin -> Settings -> Storage ("Cloud_Conciousness", Local, /media/usb, adding all access)
+- Setting up the connection on my phone "http://34.127.85.102:6080/owncloud
