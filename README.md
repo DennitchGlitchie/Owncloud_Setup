@@ -69,3 +69,9 @@ https://medium.com/jj-innovative-results/how-to-access-a-raspberry-pi-anywhere-w
 - Navigating to http://34.127.85.102:6080/owncloud (admin; dietpi)
 - Admin -> Settings -> Storage ("Cloud_Conciousness", Local, /media/usb, adding all access)
 - Setting up the connection on my phone "http://34.127.85.102:6080/owncloud
+
+
+Update 4/13/22:
+- changed crontab -e to system d with autossh. I have documented this process in the text message sign
+- I connected the pi to ethernet with the modem. activated ethernet through dietpi-config
+- i used ip route to verify that ethernet was the default 
