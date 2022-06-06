@@ -75,3 +75,7 @@ Update 4/13/22:
 - changed crontab -e to system d with autossh. I have documented this process in the text message sign
 - I connected the pi to ethernet with the modem. activated ethernet through dietpi-config
 - i used ip route to verify that ethernet was the default 
+
+Update 6/5/22:
+- New phone
+- http://34.127.85.102/owncloud/
